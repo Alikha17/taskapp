@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 40px auto; }
+        li { margin-bottom: 8px; }
+        form.inline { display: inline; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Task Manager</h1>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form action="/add" method="post">
+        <input type="text" name="title" placeholder="New task" required>
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task.title }} {% if task.done %}(done){% endif %}
+            <form class="inline" action="/delete/{{ task.id }}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
