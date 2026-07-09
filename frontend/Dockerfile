@@ -16,7 +16,8 @@ COPY app.py .
 COPY templates/ templates/
 
 ENV PATH=/home/app/.local/bin:$PATH \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    HOME=/home/app
 
 USER app
 

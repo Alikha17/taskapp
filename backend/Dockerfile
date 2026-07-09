@@ -15,7 +15,8 @@ COPY --from=builder /root/.local /home/app/.local
 COPY app.py .
 
 ENV PATH=/home/app/.local/bin:$PATH \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    HOME=/home/app
 
 USER app
 
