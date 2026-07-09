@@ -76,6 +76,17 @@ def delete_task(task_id):
         return jsonify({"error": "not found"}), 404
     return jsonify({"deleted": task_id}), 200
 
-
+@app.route("/tasks/<task_id>/toggle", methods=["PATCH"])
+def toggle_task(task_id):
+    try:
+        task = tasks_collection.find_one({"_id": ObjectId(task_id)})
+    except InvalidId:
+        return jsonify({"error": "invalid id"}), 400
+    if not task:
+        return jsonify({"error": "not found"}), 404
+    new_status = not task.get("done", False)
+    tasks_collection.update_one({"_id": ObjectId(task_id)}, {"$set": {"done": new_status}})
+    task["done"] = new_status
+    return jsonify(serialize_task(task)), 200
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

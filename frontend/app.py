@@ -36,6 +36,14 @@ def add_task():
     return redirect(url_for("index"))
 
 
+@app.route("/toggle/<task_id>", methods=["POST"])
+def toggle_task(task_id):
+    try:
+        requests.patch(f"{BACKEND_URL}/tasks/{task_id}/toggle", timeout=5)
+    except requests.RequestException:
+        pass
+    return redirect(url_for("index"))
+
 @app.route("/delete/<task_id>", methods=["POST"])
 def delete_task(task_id):
     try:

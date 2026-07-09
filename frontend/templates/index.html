@@ -21,10 +21,18 @@
         {% for task in tasks %}
         <li>
             {{ task.title }} {% if task.done %}(done){% endif %}
+            <form class="inline" action="/toggle/{{ task.id }}" method="post">
+                <button type="submit">{% if task.done %}Undo{% else %}Mark Done{% endif %}</button>
+            </form>
             <form class="inline" action="/delete/{{ task.id }}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </li>
+
+
+
+
+
         {% endfor %}
     </ul>
 </body>
