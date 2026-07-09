@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: <ECR_FRONTEND_IMAGE>:<TAG>
+          image: 113461832962.dkr.ecr.ap-south-1.amazonaws.com/taskapp-frontend:ce37fa1d
           ports:
             - containerPort: 5000
           env:
